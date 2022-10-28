@@ -1,0 +1,102 @@
+Sub soma_pontos()
+Dim x As Double
+Dim i As Integer
+Dim y As Double
+Dim a As Double
+Dim b As Double
+Dim z As Double
+Dim ultima As Integer
+
+' contagem celulas
+ultima = Range("I12").End(xlDown).Row
+' dolar resultado positivo
+For i = 13 To ultima
+    If Cells(i, 8) = "WDO" Then
+    If Cells(i, 17) > 0 Then
+    x = x + Cells(i, 17)
+    End If
+    End If
+Next i
+Cells(6, 23) = x
+
+' dolar resultado negativo
+
+For i = 13 To ultima
+    If Cells(i, 8) = "WDO" Then
+    If Cells(i, 17) < 0 Then
+    y = y + Cells(i, 17)
+    End If
+    End If
+    
+    Next i
+    Cells(6, 24) = y
+
+' indice resultado positivo
+For i = 13 To ultima
+    If Cells(i, 8) = "WIN" Then
+    If Cells(i, 17) > 0 Then
+    a = a + Cells(i, 17)
+    End If
+    End If
+    
+    Next i
+    Cells(7, 23) = a
+    
+' indice resultado negativo
+For i = 13 To ultima
+    If Cells(i, 8) = "WIN" Then
+    If Cells(i, 17) < 0 Then
+    b = b + Cells(i, 17)
+    End If
+    End If
+    
+    Next i
+    Cells(7, 24) = b
+    ' resultado fin
+    For i = 13 To ultima
+    If Cells(i, 8) = "WIN" Then
+    Cells(i, 19) = Cells(i, 17) * 0.2
+Else
+Cells(i, 19) = Cells(i, 9) * Cells(i, 17) * 10
+End If
+Next i
+
+End Sub
+Sub maiuscula()
+   For Each x In Range("C13:c100, h13:h100, g13:g100, p13:p100, r13:r100, j13:j100, k13:k100,l13:l100,m13:m100")
+      x.Value = UCase(x.Value)
+   Next
+End Sub
+Sub cont()
+Dim i As Integer
+Dim a As Integer
+Dim b As Integer
+Dim c As Integer
+Dim d As Integer
+Dim e As Integer
+
+For i = 13 To 100
+If Cells(i, 3) = "1 L 50" Or Cells(i, 3) = "1 STOP" Or Cells(i, 3) = "1 LIMIT" Or Cells(i, 3) = "1 CC" Or Cells(i, 3) = "1 L 50%" Or Cells(i, 3) = "1 S 50%" Then
+a = a + 1
+ElseIf Cells(i, 3) = "2 PB 1/3" Or Cells(i, 3) = "2 PB 50%" Or Cells(i, 3) = "2 H1/H2" Or Cells(i, 3) = "2 L1/L2" Or Cells(i, 3) = "2 CC" Or Cells(i, 3) = "2 FH" Or Cells(i, 3) = "2 FL" Then
+b = b + 1
+ElseIf Cells(i, 3) = "3 M2S" Or Cells(i, 3) = "3 PB 50%" Or Cells(i, 3) = "3 TEST L BC" Or Cells(i, 3) = "3 2BR" Or Cells(i, 3) = "3 2LEG" Or Cells(i, 3) = "3 PB EMA" Or Cells(i, 3) = "3 M2B" Or Cells(i, 3) = "3 WEDGE" Then
+c = c + 1
+ElseIf Cells(i, 3) = "4 SB DB" Or Cells(i, 3) = "4 SB DT" Or Cells(i, 3) = "4 LIMIT DB" Or Cells(i, 3) = "4 LIMIT DT" Or Cells(i, 3) = "4 2LEG" Or Cells(i, 3) = "4 2BR" Or Cells(i, 3) = "4 LIM PB" Or Cells(i, 3) = "4 STOP PB" Or Cells(i, 3) = "4 50%" Or Cells(i, 3) = "4 L LOC" Or Cells(i, 3) = "4 SB" Then
+d = d + 1
+ElseIf Cells(i, 3) = "5 LIMIT LOC" Or Cells(i, 3) = "5 SB STOP" Or Cells(i, 3) = "5 FADE" Then
+e = e + 1
+End If
+Next i
+Cells(12, 38) = a
+Cells(13, 38) = b
+Cells(14, 38) = c
+Cells(15, 38) = d
+Cells(16, 38) = e
+
+End Sub
+Sub tudo()
+maiuscula
+soma_pontos
+cont
+End Sub
